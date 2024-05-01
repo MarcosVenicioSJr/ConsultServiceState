@@ -11,15 +11,11 @@ namespace ConsultServiceState.Services.Http
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(_httpClient));
         }
 
-        public async Task<bool> GetAsync(string url)
+        public async Task<HttpResponseMessage> GetAsync(string url)
         {
             HttpResponseMessage response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
-
-            if (response.IsSuccessStatusCode)
-                return true;
-            else
-                return false;
+            return response;
         }
     }
 }
